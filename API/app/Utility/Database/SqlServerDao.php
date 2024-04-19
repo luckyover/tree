@@ -10,7 +10,7 @@ use PDOException;
 
 class SqlServerDao
 {
-   
+
     /**
      * execute
      *
@@ -68,7 +68,7 @@ class SqlServerDao
             }
             // Store log for query
             $debug_sql = $this->interpolateQuery($store_name, $params);
-         
+
             // EXECUTE SQL
             if (!$stmt->execute()) {
                 $result[0][0]['id']         = $stmt->errorCode();

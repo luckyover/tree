@@ -2,6 +2,7 @@
 namespace App\Utility\Log\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use App\Utility\Log\BLogger;
 
 class BLog extends Facade
 {
@@ -12,6 +13,6 @@ class BLog extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return \App\Utility\Log\BLogger::class;
+        return BLogger::class;
     }
 }

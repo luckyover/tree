@@ -178,27 +178,7 @@ class SqlServerDao
     public function insertDatabaseLog($store_name = '', $params = [], $error_message = '')
     {
         try {
-            if ($store_name == '') {
-                return false;
-            }
-            // get  prg_id
-            if (strlen($store_name) < 8) {
-                return false;
-            }
-            $act_position = strpos($store_name, '_ACT');
-            $prg_id = strtolower(substr($store_name, 4, $act_position - 4));
-            $json_array = [];
-            if (isset($params['json']) && $params['json'] != '') {
-                $json_array = json_decode($params['json'], true);
-            }
-            $log['prs_date'] = Carbon::now();
-            $log['prs_user_id'] = $json_array['staff_cd'] ?? session('_login_session')->staff_cd;
-            $log['prs_prg_id'] = $prg_id;
-            $log['prs_ip'] = $json_array['ip'] ?? '';
-            $log['spc'] = $store_name;
-            $log['spc_params'] = $this->interpolateQuery($store_name, $params);
-            $log['error_message'] = $error_message;
-            return $this->log_repo->insertLog($log);
+           return true;
         } catch (\Throwable $th) {
             // Store log error exception
             BLog::insert('database_log', 'error', $th->getMessage());

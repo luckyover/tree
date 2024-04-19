@@ -140,6 +140,7 @@ class AuthController  extends APIController
     public function delAuth(Request $request)
     {
             try {
+
                 $params['json'] = json_encode($request->all());
                 $data = Dao::execute('SPC_AUTH_ACT1', $params);
                 dd($data);

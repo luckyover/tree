@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Log;
 class BLogger
 {
     /**
-     * insert log 
+     * insert log
      *
      * @param  String $log_channel : stderr, database_log, mail_log | default : stderr
      * @param  String $log_level : default : debug | emergency, alert, critical, error, warning, notice, info, and debug.
      * @param  String $message
-     * @param  Array $contextual 
+     * @param  Array $contextual
      * @return void
      */
     public function insert($log_channel = 'stderr', $log_level = 'debug', $message = '', $contextual  = [])
     {
+
         // if LOG_DRIVER has not value => show all in stderr (AWS CloudWatch)
         if (env('LOG_CHANNEL','') == 'stderr') {
             $this->processError('stderr', $log_level, $message, $contextual);

@@ -22,5 +22,9 @@ class Constants
     public const DB_CONNECTION_SQL_SERVER = 'sqlsrv';
     public const DB_EXCEPTION_CODE = 999;
 
+    public const REQUIRED = 'Trường này không được để trống.';
+    public const EMAIL = 'Trường email không đúng định dạng.';
+    public const DUPLICATE = 'Tài khoản đã tồn tại.';
+    public const PASS_ERROR = 'Tài khoản mật khẩu không chính xác.';
 
 }

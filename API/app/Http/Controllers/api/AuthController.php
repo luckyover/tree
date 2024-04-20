@@ -143,7 +143,6 @@ class AuthController  extends APIController
 
                 $params['json'] = json_encode($request->all());
                 $data = Dao::execute('SPC_AUTH_ACT1', $params);
-                dd($data);
                 return $this->handleApiSuccess();
             } catch (\Throwable $e) {
                 return $this->handleApiError($e->getMessage(),$e, 500);

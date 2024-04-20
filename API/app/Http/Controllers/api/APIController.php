@@ -31,6 +31,6 @@ class APIController extends Controller
             'errors' => $payload,
             'status' =>$http_code
         ];
-        return response()->json($response);
+        return response()->json($response,$http_code);
     }
 }

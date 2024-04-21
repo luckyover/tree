@@ -16,6 +16,7 @@ class AuthController  extends APIController
             $data['tel']    = $request->tel??'';
             $data['email'] = $request->email??'';
             $data['password'] = $request->password??'';
+            $data['role'] = $request->role??'';
 
 
             $message_error  = [
@@ -56,7 +57,7 @@ class AuthController  extends APIController
                 'tel'      => $data['tel'],
                 'email'    => $data['email'],
                 'password' => bcrypt($data['password']),
-                'role'     => 0,
+                'role'     => $data['role'],
                 'cre_date' => $date,
                 'upd_date' => $date,
                 'del_date' => $date,
@@ -77,7 +78,7 @@ class AuthController  extends APIController
             $data['email'] = $request->email??'';
             $data['password'] = $request->password??'';
             $data['role'] = $request->role??'';
-
+    
             $message_error  = [
                 'required' => Constants::REQUIRED,
                 'email' => Constants::EMAIL,
@@ -101,10 +102,17 @@ class AuthController  extends APIController
 
             if(Auth::attempt($data)){
                 $user = Auth::user();
-                $tokenResult = $user->createToken('authToken')->plainTextToken;
-                $data['access_token']   =  $tokenResult;
-                $data['token_type']     = 'Bearer';
-                return $this->handleApiSuccess($data);
+                if($user->del_flg == 0){
+                    $tokenResult = $user->createToken('authToken')->plainTextToken;
+                    $data['access_token']   =  $tokenResult;
+                    $data['token_type']     = 'Bearer';
+                    $data['user_nm']        =  $user->user_nm;
+                    return $this->handleApiSuccess($data);
+                }else{
+                    $errors['alter'] = Constants::PASS_ERROR;
+                    return $this->handleApiError('Handling failure',$errors,501);
+                }
+               
             }
             $errors['alter'] = Constants::PASS_ERROR;
             return $this->handleApiError('Handling failure',$errors,501);

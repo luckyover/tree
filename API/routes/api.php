@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CartController;
+use App\Http\Controllers\api\AdminController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,5 +38,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('get-auth', [AuthController::class, 'getAuth']);
     Route::post('delete-auth', [AuthController::class, 'delAuth']);
+    Route::post('get-cart', [CartController::class, 'getCart']);
+    Route::post('add-cart', [CartController::class, 'addCart']);
+    Route::post('remove-cart', [CartController::class, 'removeCart']);
+    Route::post('update-cart', [CartController::class, 'updateCart']);
+    Route::post('order-cart', [CartController::class, 'orderCart']);
+    Route::post('his-cart', [CartController::class, 'hisCart']);
+
+
+    Route::post('get-admin', [AdminController::class, 'getAdmin']);
+    Route::post('order-update-admin', [AdminController::class, 'orderUpdateAdmin']);
+    Route::post('get-oder-detail-admin', [AdminController::class, 'orderDetailAdmin']);
+    
 
 });
